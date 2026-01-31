@@ -23,6 +23,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import LandingPage from "./Home";
 import ContactPage from "./contact";
+import AboutUs from "./AboutUs";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/contact" element={<ContactPage />} />
+           <Route path="/AboutUs" element={<AboutUs />} />
       </Routes>
     </Router>
   );

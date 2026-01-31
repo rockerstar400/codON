@@ -2,20 +2,18 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Phone, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
+import logo from './assets/logo.png'; // Aapne logo path check kar lein
+
 
 
 /* SAME LOGO COMPONENT */
-const CodonLogo = ({ className = "h-8", textColor = "text-white" }) => (
-  <div className={`flex items-center gap-2 ${className}`}>
-    <svg viewBox="0 0 100 100" className="h-10 w-10" fill="none">
-      <circle cx="50" cy="50" r="45" stroke="currentColor" strokeWidth="2" className="opacity-20" />
-      <path d="M30 70C30 70 35 50 50 50C65 50 70 30 70 30" stroke="#5bc5d4" strokeWidth="8" strokeLinecap="round" />
-      <path d="M30 30C30 30 35 50 50 50C65 50 70 70 70 70" stroke="currentColor" strokeWidth="8" strokeLinecap="round" />
-      <circle cx="50" cy="50" r="12" fill="#1a7a85" stroke="white" strokeWidth="2" />
-    </svg>
-    <span className={`text-2xl font-black tracking-tight ${textColor}`}>
-      cod<span className="text-[#5bc5d4]">ON</span>
-    </span>
+const CodonLogo = ({ className = "h-8" }) => (
+  <div className={`flex items-center ${className}`}>
+    <img 
+      src={logo} 
+      alt="Logo" 
+      className="h-full w-auto object-contain" 
+    />
   </div>
 );
 
@@ -67,7 +65,7 @@ const ContactPage = () => {
             </div>
             <div>
               <p className="text-sm text-gray-500">Call (8am – 8pm, Everyday)</p>
-              <p className="font-bold text-lg text-[#1a7a85]">+91 82250033135</p>
+              <p className="font-bold text-lg text-[#1a7a85]">+91 91111111111</p>
             </div>
           </div>
 
