@@ -1,0 +1,114 @@
+import React from "react";
+import { motion } from "framer-motion";
+import { Phone, Mail } from "lucide-react";
+import { Link } from "react-router-dom";
+
+
+/* SAME LOGO COMPONENT */
+const CodonLogo = ({ className = "h-8", textColor = "text-white" }) => (
+  <div className={`flex items-center gap-2 ${className}`}>
+    <svg viewBox="0 0 100 100" className="h-10 w-10" fill="none">
+      <circle cx="50" cy="50" r="45" stroke="currentColor" strokeWidth="2" className="opacity-20" />
+      <path d="M30 70C30 70 35 50 50 50C65 50 70 30 70 30" stroke="#5bc5d4" strokeWidth="8" strokeLinecap="round" />
+      <path d="M30 30C30 30 35 50 50 50C65 50 70 70 70 70" stroke="currentColor" strokeWidth="8" strokeLinecap="round" />
+      <circle cx="50" cy="50" r="12" fill="#1a7a85" stroke="white" strokeWidth="2" />
+    </svg>
+    <span className={`text-2xl font-black tracking-tight ${textColor}`}>
+      cod<span className="text-[#5bc5d4]">ON</span>
+    </span>
+  </div>
+);
+
+const ContactPage = () => {
+  return (
+    <div className="min-h-screen bg-white">
+
+      {/* NAVBAR */}
+      <nav className="flex items-center justify-between px-6 py-4 bg-[#1a7a85] text-white sticky top-0 z-50 shadow">
+        {/* <CodonLogo /> */}
+                    <Link to="/" className="cursor-pointer">
+    <CodonLogo />
+  </Link>
+        <div className="hidden md:flex gap-6 text-sm font-medium">
+                         <Link to="/" className="hover:text-[#5bc5d4] transition">Home</Link>
+            
+          <a href="#" className="hover:text-[#5bc5d4]">NEET PG</a>
+          <a href="#" className="hover:text-[#5bc5d4]">Plans</a>
+          <a href="#" className="hover:text-[#5bc5d4]">Careers</a>
+          <a href="#" className="text-[#5bc5d4] font-bold">Contact</a>
+        </div>
+        <button className="bg-[#5bc5d4] px-6 py-2 rounded-md font-bold hover:bg-white hover:text-[#1a7a85] transition">
+          Dashboard
+        </button>
+      </nav>
+
+      {/* HERO */}
+      <section className="bg-gradient-to-b from-[#1a7a85] to-[#2a9ba8] py-28 text-center text-white">
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-4xl md:text-5xl font-extrabold"
+        >
+          Contact Us
+        </motion.h1>
+      </section>
+
+      {/* CONTACT CARD */}
+      <section className="-mt-24 pb-20 px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-xl mx-auto bg-white rounded-2xl shadow-xl p-10"
+        >
+          <div className="flex items-start gap-4 mb-8">
+            <div className="w-12 h-12 bg-[#5bc5d4] rounded-full flex items-center justify-center text-white">
+              <Phone />
+            </div>
+            <div>
+              <p className="text-sm text-gray-500">Call (8am – 8pm, Everyday)</p>
+              <p className="font-bold text-lg text-[#1a7a85]">+91 82250033135</p>
+            </div>
+          </div>
+
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 bg-[#5bc5d4] rounded-full flex items-center justify-center text-white">
+              <Mail />
+            </div>
+            <div>
+              <p className="text-sm text-gray-500">Email us</p>
+              <p className="font-bold text-lg text-[#1a7a85]">
+                support@codonacademy.com
+              </p>
+            </div>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* ADDRESS */}
+      <section className="text-center pb-16">
+        <p className="font-semibold text-[#1a7a85]">CodON Academy Pvt. Ltd.</p>
+        <p className="text-gray-600 text-sm mt-2">
+          393, Second Cross, Dollars Colony <br />
+          JP Nagar 4th Phase, Bangalore – 560078
+        </p>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="bg-gray-900 py-12 text-center text-white">
+        <div className="flex justify-center mb-4 opacity-80">
+          <CodonLogo />
+        </div>
+        <p className="text-gray-500 text-sm">© 2026 codON Academy</p>
+        <div className="flex justify-center gap-6 mt-4 text-xs text-gray-400">
+          <a href="#" className="hover:text-white">Privacy Policy</a>
+          <a href="#" className="hover:text-white">Terms</a>
+          <a href="#" className="hover:text-white">Support</a>
+        </div>
+      </footer>
+
+    </div>
+  );
+};
+
+export default ContactPage;
