@@ -23,7 +23,7 @@ const Header = () => {
             <Link to="/" className="cursor-pointer">
               <CodonLogo className="h-10" />
                <span className="text-2xl font-black tracking-tighter">
-          cod<span className="text-[#5bc5d4]">ON</span>
+          Cod<span className="text-[#5bc5d4]">ON</span>
         </span>
             </Link>
           </div>

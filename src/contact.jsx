@@ -9,10 +9,10 @@ import logo from './assets/logo.png'; // Aapne logo path check kar lein
 /* SAME LOGO COMPONENT */
 const CodonLogo = ({ className = "h-8" }) => (
   <div className={`flex items-center ${className}`}>
-    <img 
-      src={logo} 
-      alt="Logo" 
-      className="h-full w-auto object-contain" 
+    <img
+      src={logo}
+      alt="Logo"
+      className="h-full w-auto object-contain"
     />
   </div>
 );
@@ -22,7 +22,7 @@ const ContactPage = () => {
     <div className="min-h-screen bg-white">
 
       {/* NAVBAR */}
-    <nav className="bg-black/90 backdrop-blur-md text-white sticky top-0 z-50 shadow-lg w-full border-b border-white/5">
+      <nav className="bg-black/90 backdrop-blur-md text-white sticky top-0 z-50 shadow-lg w-full border-b border-white/5">
         {/* Relative wrapper jo links ko center hone mein help karega */}
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between relative">
 
@@ -30,9 +30,9 @@ const ContactPage = () => {
           <div className="flex items-center z-10">
             <Link to="/" className="cursor-pointer">
               <CodonLogo className="h-10" />
-               <span className="text-2xl font-black tracking-tighter">
-          cod<span className="text-[#5bc5d4]">ON</span>
-        </span>
+              <span className="text-2xl font-black tracking-tighter">
+                Cod<span className="text-[#5bc5d4]">ON</span>
+              </span>
             </Link>
           </div>
 
@@ -78,7 +78,7 @@ const ContactPage = () => {
           viewport={{ once: true }}
           className="max-w-xl mx-auto bg-white rounded-2xl shadow-xl p-10"
         >
-          <div className="flex items-start gap-4 mb-8">
+          {/* <div className="flex items-start gap-4 mb-8">
             <div className="w-12 h-12 bg-[#5bc5d4] rounded-full flex items-center justify-center text-white">
               <Phone />
             </div>
@@ -86,9 +86,27 @@ const ContactPage = () => {
               <p className="text-sm text-gray-500">Call (8am – 8pm, Everyday)</p>
               <p className="font-bold text-lg text-[#1a7a85]">+91 91111111111</p>
             </div>
-          </div>
+          </div> */}
+          <a
+              href="https://wa.me/9191111111111"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="flex items-start gap-4 mb-8 group cursor-pointer"
+>
+  <div className="w-12 h-12 bg-[#5bc5d4] rounded-full flex items-center justify-center text-white group-hover:scale-110 transition">
+    <Phone />
+  </div>
 
-          <div className="flex items-start gap-4">
+  <div>
+    <p className="text-sm text-gray-500">Call (8am – 8pm, Everyday)</p>
+    <p className="font-bold text-lg text-[#1a7a85] group-hover:underline">
+      +91 91111111111
+    </p>
+  </div>
+</a>
+
+
+          {/* <div className="flex items-start gap-4">
             <div className="w-12 h-12 bg-[#5bc5d4] rounded-full flex items-center justify-center text-white">
               <Mail />
             </div>
@@ -98,7 +116,25 @@ const ContactPage = () => {
                 support@codonacademy.com
               </p>
             </div>
-          </div>
+          </div> */}
+          <a
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=support@codonmed.com"
+  target="_blank"
+  rel="noopener noreferrer"
+            className="flex items-start gap-4 group cursor-pointer"
+          >
+            <div className="w-12 h-12 bg-[#5bc5d4] rounded-full flex items-center justify-center text-white group-hover:scale-110 transition">
+              <Mail />
+            </div>
+
+            <div>
+              <p className="text-sm text-gray-500">Email us</p>
+              <p className="font-bold text-lg text-[#1a7a85] group-hover:underline">
+                support@codonacademy.com
+              </p>
+            </div>
+          </a>
+
         </motion.div>
       </section>
 

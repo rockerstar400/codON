@@ -23,7 +23,11 @@ const FeatureCard = ({ icon: Icon, title, description }) => (
   </div>
 );
 
+
 const AboutUs = () => {
+
+
+
   return (
     <div className="min-h-screen bg-[#f8fafc] font-sans">
       <Header />
@@ -55,15 +59,7 @@ const AboutUs = () => {
     </p>
 
     {/* --- BUTTON CENTERED DIV START --- */}
-    <div className="mt-12 flex justify-center">
-      <button className="group relative bg-white text-[#1a7a85] px-12 py-5 rounded-2xl text-xl font-bold shadow-[0_20px_40px_rgba(0,0,0,0.15)] hover:shadow-[0_25px_50px_rgba(0,0,0,0.25)] transition-all duration-300 overflow-hidden">
-        <span className="relative z-10 flex items-center gap-2">
-          Go to dashboard <ChevronRight className="group-hover:translate-x-1 transition-transform" />
-        </span>
-        {/* Hover Shine Effect */}
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#5bc5d4]/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-      </button>
-    </div>
+
     {/* --- BUTTON CENTERED DIV END --- */}
 
   </div>
@@ -163,7 +159,7 @@ const AboutUs = () => {
       </section>
 
       {/* --- CONTACT & MAP --- */}
-      <section className="max-w-7xl mx-auto px-6 py-20">
+      {/* <section className="max-w-7xl mx-auto px-6 py-20">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-10">
             <div>
@@ -198,7 +194,71 @@ const AboutUs = () => {
             <iframe title="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3889.0645476313313!2d77.5936783758436!3d12.903597416382025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae15167f2f111b%3A0xb36a18d53085287d!2sMarrow%20(Neuroglia%20Health%20Pvt%20Ltd)!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" width="100%" height="100%" style={{ border: 0 }} allowFullScreen="" loading="lazy"></iframe>
           </div>
         </div>
-      </section>
+      </section> */}
+
+
+      {/* --- CONTACT & MAP SECTION UPDATED --- */}
+<section className="max-w-7xl mx-auto px-6 py-20">
+  <div className="grid lg:grid-cols-2 gap-16 items-center">
+    <div className="space-y-10">
+      <div>
+        <h2 className="text-4xl font-bold text-slate-900 mb-4">Get in Touch</h2>
+        <p className="text-slate-500">Visit our headquarters or reach out to our support team.</p>
+      </div>
+
+      <div className="space-y-6">
+        {/* Phone Clickable - Dial Pad khul jayega */}
+        <a 
+            href="https://wa.me/9191111111111"
+  target="_blank"
+  rel="noopener noreferrer"
+          className="flex gap-6 items-center group cursor-pointer"
+        >
+          <div className="w-14 h-14 bg-white shadow-md rounded-2xl flex items-center justify-center text-[#1a7a85] group-hover:bg-[#1a7a85] group-hover:text-white transition-all duration-300">
+            <Phone size={24} />
+          </div>
+          <div>
+            <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Support Line</p>
+            <p className="text-xl font-bold text-slate-800 group-hover:text-[#1a7a85] transition-colors">
+              +91 91111111111
+            </p>
+          </div>
+        </a>
+
+        {/* Email Clickable - Email Client khul jayega */}
+        <a 
+           href="https://mail.google.com/mail/?view=cm&fs=1&to=support@codonmed.com"
+  target="_blank"
+  rel="noopener noreferrer"
+ 
+          className="flex gap-6 items-center group cursor-pointer"
+        >
+          <div className="w-14 h-14 bg-white shadow-md rounded-2xl flex items-center justify-center text-[#1a7a85] group-hover:bg-[#1a7a85] group-hover:text-white transition-all duration-300">
+            <Mail size={24} />
+          </div>
+          <div>
+            <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Email Support</p>
+            <p className="text-xl font-bold text-slate-800 group-hover:text-[#1a7a85] transition-colors">
+              support@codonmed.com
+            </p>
+          </div>
+        </a>
+
+      </div>
+
+      {/* Address Block */}
+      <div className="p-8 bg-slate-100 rounded-3xl">
+        <h4 className="font-bold text-slate-800 mb-2 text-lg">CodON Health Private Limited</h4>
+        <p className="text-slate-500">393, Second Cross, Dollars Colony, JP Nagar 4th Phase, Bangalore, Pin 560078</p>
+      </div>
+    </div>
+
+    {/* Map remains the same */}
+    <div className="h-[450px] rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-white">
+      <iframe title="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3889.0645476313313!2d77.5936783758436!3d12.903597416382025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae15167f2f111b%3A0xb36a18d53085287d!2sMarrow%20(Neuroglia%20Health%20Pvt%20Ltd)!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" width="100%" height="100%" style={{ border: 0 }} allowFullScreen="" loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
 
       {/* --- FOOTER --- */}
       <footer className="bg-slate-950 pt-20 pb-10 text-center">
