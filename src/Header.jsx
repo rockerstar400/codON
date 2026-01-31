@@ -14,7 +14,7 @@ const CodonLogo = ({ className = "h-8" }) => (
 
 const Header = () => {
   return (
-<nav className="bg-[#1a7a85] text-white sticky top-0 z-50 shadow-md w-full">
+<nav className="bg-black/90 backdrop-blur-md text-white sticky top-0 z-50 shadow-lg w-full border-b border-white/5">
         {/* Relative wrapper jo links ko center hone mein help karega */}
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between relative">
 

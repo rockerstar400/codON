@@ -92,7 +92,7 @@ const LandingPage = () => {
           </button>
         </div>
       </nav> */}
-      <nav className="bg-[#1a7a85] text-white sticky top-0 z-50 shadow-md w-full">
+      <nav className="bg-black/90 backdrop-blur-md text-white sticky top-0 z-50 shadow-lg w-full border-b border-white/5">
         {/* Relative wrapper jo links ko center hone mein help karega */}
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between relative">
 
@@ -354,6 +354,27 @@ const LandingPage = () => {
                 className="h-full bg-[#1a7a85] rounded-full"
                 animate={{ width: `${((currentIndex + 3) / testimonialsData.length) * 100}%` }}
               />
+            </div>
+          </div>
+        </div>
+      </section>
+            <section className="max-w-7xl mx-auto px-6 py-16">
+        <div className="bg-gradient-to-br from-[#1a7a85] to-[#2d4d50] rounded-[3rem] p-12 text-white flex flex-col md:flex-row items-center justify-between gap-10 shadow-2xl">
+          <div className="md:w-1/2">
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">Learn on the go.</h2>
+            <p className="text-teal-50/80 text-lg mb-8">Join 500,000+ students mastering medical concepts every day. Available on all your devices.</p>
+            <div className="flex flex-wrap gap-4">
+              <button className="bg-white text-black px-8 py-3 rounded-2xl font-bold flex items-center gap-3 hover:bg-slate-100 transition shadow-lg">
+                <div className="text-left leading-none text-[10px] uppercase">Download on <br /><span className="text-lg">App Store</span></div>
+              </button>
+              <button className="bg-black text-white px-8 py-3 rounded-2xl font-bold border border-white/20 flex items-center gap-3 hover:bg-white/10 transition shadow-lg">
+                <div className="text-left leading-none text-[10px] uppercase">Get it on <br /><span className="text-lg">Google Play</span></div>
+              </button>
+            </div>
+          </div>
+          <div className="md:w-1/3 flex justify-center">
+            <div className="w-64 h-64 bg-white/10 rounded-full border border-white/20 flex items-center justify-center backdrop-blur-md">
+              <CodonLogo className="h-20" />
             </div>
           </div>
         </div>

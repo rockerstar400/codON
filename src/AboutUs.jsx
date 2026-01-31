@@ -45,7 +45,7 @@ const AboutUs = () => {
     </div>
 
     {/* Heading */}
-    <h1 className="text-5xl md:text-7xl font-black text-slate-900 mb-6 tracking-tight">
+    <h1 className="text-5xl md:text-7xl font-black text-[#5bc5d4] mb-6 tracking-tight">
       About US
     </h1>
 
