@@ -232,7 +232,7 @@ useEffect(() => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.8 }}
           >
-            <h1 className="text-6xl md:text-9xl font-black text-white mb-4 tracking-tighter leading-tight">
+            <h1 className="text-6xl md:text-9xl font-black text-white mb-4 mt-2 tracking-tighter leading-tight">
               Cod<span className="text-[#5bc5d4]">ON</span>
             </h1>
             <h2 className="text-2xl md:text-4xl font-bold text-white mb-6 tracking-tight">
@@ -618,7 +618,7 @@ useEffect(() => {
 
         {/* Copyright Section */}
         <p className="text-gray-500 text-sm border-t border-gray-800 pt-8 max-w-xs mx-auto">
-          © 2026 CODON Classes. Empowering Future Specialists.
+          © 2026 CODON Classes Accademy. Empowering Future Specialists.
         </p>
       </footer>
 
