@@ -121,8 +121,8 @@ useEffect(() => {
             <div className="flex gap-8 text-[12px] font-bold tracking-wider uppercase">
               <a href="#" className="hover:text-[#5bc5d4] transition-colors">NEET UG</a>
               <a href="#" className="hover:text-[#5bc5d4] transition-colors">MENTORS</a>
-              <Link to="/plan" className="hover:text-[#5bc5d4] transition-colors">PLANS</Link>
-              <Link to="/feacure" className="hover:text-[#5bc5d4] transition-colors">FEATURES</Link>
+              <Link to="#" className="hover:text-[#5bc5d4] transition-colors">PLANS</Link>
+              <Link to="#" className="hover:text-[#5bc5d4] transition-colors">FEATURES</Link>
               <Link to="/contact" className="hover:text-[#5bc5d4] transition-colors">CONTACT</Link>
               <a href="/AboutUs" className="hover:text-[#5bc5d4] transition-colors">ABOUT US</a>
 
