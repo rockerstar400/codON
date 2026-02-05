@@ -233,7 +233,7 @@ const AboutUs = () => {
       <div className="space-y-6">
         {/* Phone Clickable - Dial Pad khul jayega */}
         <a 
-            href="https://wa.me/9191111111111"
+            href="https://wa.me/9987134790"
   target="_blank"
   rel="noopener noreferrer"
           className="flex gap-6 items-center group cursor-pointer"
@@ -244,14 +244,14 @@ const AboutUs = () => {
           <div>
             <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Support Line</p>
             <p className="text-xl font-bold text-slate-800 group-hover:text-[#1a7a85] transition-colors">
-              +91 91111111111
+              +91 9987134790
             </p>
           </div>
         </a>
 
         {/* Email Clickable - Email Client khul jayega */}
         <a 
-           href="https://mail.google.com/mail/?view=cm&fs=1&to=support@codonmed.com"
+           href="https://mail.google.com/mail/?view=cm&fs=1&to=codonneetug@gmail.com"
   target="_blank"
   rel="noopener noreferrer"
  
@@ -263,7 +263,7 @@ const AboutUs = () => {
           <div>
             <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Email Support</p>
             <p className="text-xl font-bold text-slate-800 group-hover:text-[#1a7a85] transition-colors">
-              support@codonmed.com
+              codonneetug@gmail.com
             </p>
           </div>
         </a>

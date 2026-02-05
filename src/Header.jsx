@@ -31,12 +31,15 @@ const Header = () => {
           {/* 2. Middle: Navigation Links (ABSOLUTE CENTERED) */}
           <div className="hidden md:flex absolute left-1/2 -translate-x-1/2">
             <div className="flex gap-8 text-[13px] font-bold tracking-wide uppercase">
-              <Link to="/" className="hover:text-[#5bc5d4] transition-colors">Home</Link>
-              <a href="#" className="hover:text-[#5bc5d4] transition-colors">NEET PG</a>
+              {/* <Link to="/" className="hover:text-[#5bc5d4] transition-colors">Home</Link> */}
+              <a href="#" className="hover:text-[#5bc5d4] transition-colors">NEET UG</a>
               {/* <a href="#" className="hover:text-[#5bc5d4] transition-colors">Plans</a> */}
-              <a href="#" className="hover:text-[#5bc5d4] transition-colors">Careers</a>
-              <Link to="/contact" className="hover:text-[#5bc5d4] transition-colors">Contact</Link>
+              <a href="#" className="hover:text-[#5bc5d4] transition-colors">MENTORS</a>
+              <Link to="/plan" className="hover:text-[#5bc5d4] transition-colors">PLANS</Link>
+              <Link to="/feacure" className="hover:text-[#5bc5d4] transition-colors">FEATURES</Link>
               <Link to="/AboutUS" className="hover:text-[#5bc5d4] transition-colors">AboutUS</Link>
+              <Link to="/contact" className="hover:text-[#5bc5d4] transition-colors">CONTACT</Link>
+
             </div>
           </div>
 

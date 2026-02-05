@@ -1,6 +1,9 @@
-import React, { useState } from 'react'; // Corrected Import
-import { motion } from 'framer-motion';
-import { PlayCircle, BookOpen, BarChart2, Settings, Activity, ChevronLeft, ChevronRight, Sparkles, Facebook, Instagram, Youtube, Twitter } from 'lucide-react';
+import React, { useState,useEffect } from 'react'; // Corrected Import
+import { motion ,AnimatePresence } from 'framer-motion';
+import {
+  PlayCircle, BookOpen, Play, Apple, BarChart2, Settings, Activity, ChevronLeft,
+  ChevronRight, GraduationCap, Loader2, Sparkles, Facebook, Instagram, Youtube, Users, Dna, Database, ClipboardCheck, Video
+} from 'lucide-react';
 import { Link } from "react-router-dom";
 import logo from "./assets/logo.png"
 import text from "./assets/text.png"
@@ -16,50 +19,78 @@ const CodonLogo = ({ className = "h-8" }) => (
   </div>
 );
 
-// Testimonials Data
-const testimonialsData = [
-  {
-    text: "My reasons for sticking with codON are the faculty and QBank. I gave all the codON GTs and reviewing them properly helped me overcome plateaus. Knowing everything and attempting questions are two different games.",
-    name: "Dr Pooshan",
-    rank: "Rank 1",
-    img: "https://randomuser.me/api/portraits/men/32.jpg"
-  },
-  {
-    text: "I built my concepts through codON Videos and solved the QBank as much as possible. I found codON QBank and its explanations really nice - they gave me a complete idea of the subject while solving. Revision is the key.",
-    name: "Dr Greeshma",
-    rank: "Rank 2",
-    img: "https://randomuser.me/api/portraits/women/44.jpg"
-  },
-  {
-    text: "My core strategy revolved around GTs - from improving weak areas to revising important topics. I did most of my revision through analysing old GTs, which also boosted my confidence. I'd strongly suggest codON GTs.",
-    name: "Dr Ashutosh",
-    rank: "Rank 3",
-    img: "https://randomuser.me/api/portraits/men/46.jpg"
-  },
-  {
-    text: "The clinical explanations in the QBank are unmatched. It helped me bridge the gap between theory and clinical practice seamlessly. Highly recommended for every NEET PG aspirant.",
-    name: "Dr Sneha",
-    rank: "Rank 12",
-    img: "https://randomuser.me/api/portraits/women/65.jpg"
-  }
-];
+
 
 const LandingPage = () => {
-  // --- SLIDER STATE & LOGIC (Must be inside component) ---
+const [faculty, setFaculty] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  
+  const itemsPerPage = 4;
 
+  // Environment variable se base URL nikalna
+  const BASE_URL = import.meta.env.VITE_BASE_URL || process.env.REACT_APP_BASE_URL;
+
+useEffect(() => {
+  const fetchFaculty = async () => {
+    try {
+      setLoading(true);
+      
+      // BASE_URL yahan define karein
+      const BASE_URL = import.meta.env.VITE_BASE_URL;
+      
+      // API Call: baseURL/api/faculty/list
+      // Note: Base URL ke baad / check kar lein, double // na ho jaye
+      const response = await fetch(`${BASE_URL}/api/faculty/list`);
+      
+      if (!response.ok) throw new Error('Network response was not ok');
+      
+      const resData = await response.json();
+      
+      // Agar aapka data "data" key ke andar hai toh resData.data use karein
+      setFaculty(resData.data || resData); 
+      
+    } catch (err) {
+      console.error("Fetch Error:", err);
+      setError("Data load nahi ho paya");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchFaculty();
+}, []);
+
+  // Slider Logic (4 items at a time)
   const nextSlide = () => {
-    // We show 3 cards at once on desktop, so we stop before the last 3
-    if (currentIndex < testimonialsData.length - 3) {
-      setCurrentIndex(currentIndex + 1);
+    if (currentIndex + itemsPerPage < faculty.length) {
+      setCurrentIndex(prev => prev + itemsPerPage);
+    } else {
+      setCurrentIndex(0); // Pehle page par wapas jaane ke liye
     }
   };
 
   const prevSlide = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
+    if (currentIndex - itemsPerPage >= 0) {
+      setCurrentIndex(prev => prev - itemsPerPage);
+    } else {
+      // Last page par jaane ke liye
+      const lastPageIndex = Math.floor((faculty.length - 1) / itemsPerPage) * itemsPerPage;
+      setCurrentIndex(lastPageIndex);
     }
   };
+
+  const visibleFaculty = faculty.slice(currentIndex, currentIndex + itemsPerPage);
+
+  if (loading) return (
+    <div className="h-64 flex items-center justify-center text-[#1a7a85]">
+      <Loader2 className="animate-spin" size={40} />
+    </div>
+  );
+
+  if (error) return <div className="text-center text-red-500 py-10 font-bold">Error: {error}</div>;
+  if (faculty.length === 0) return null;
 
   const fadeInUp = {
     initial: { opacity: 0, y: 60 },
@@ -71,97 +102,68 @@ const LandingPage = () => {
   return (
     <div className="min-h-screen bg-white font-sans text-gray-800">
 
-      {/* 1. NAVBAR */}
-      {/* <nav className="flex items-center justify-between px-6 py-4 bg-[#1a7a85] text-white sticky top-0 z-50 shadow-md">
-        <div className="flex items-center gap-12 flex items-center justify-between">
-          <Link to="/" className="cursor-pointer">
-            <CodonLogo className="h-10" />
-          </Link>
-          <div className="hidden md:flex gap-6 text-sm font-medium">
-            <Link to="/" className="hover:text-[#5bc5d4] transition">Home</Link>
-            <a href="#" className="hover:text-[#5bc5d4] transition">NEET PG</a>
-            <a href="#" className="hover:text-[#5bc5d4] transition">Plans</a>
-            <a href="#" className="hover:text-[#5bc5d4] transition">Careers</a>
-            <a href="/contact" className="hover:text-[#5bc5d4] transition">Contact</a>
-            <a href="/AboutUS" className="hover:text-[#5bc5d4] transition">AboutUS</a>
 
-          </div>
-        </div>
-        <div className="flex items-center gap-4">
-          <button className="bg-[#5bc5d4] px-6 py-2 rounded-md font-bold hover:bg-white hover:text-[#1a7a85] transition-all duration-300 shadow-lg">
-            Dashboard
-          </button>
-        </div>
-      </nav> */}
       <nav className="bg-black/90 backdrop-blur-md text-white sticky top-0 z-50 shadow-lg w-full border-b border-white/5">
-        {/* Relative wrapper jo links ko center hone mein help karega */}
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between relative">
 
-          {/* 1. Left Side: Logo (Position wahi rahegi) */}
+          {/* 1. Left Side: Logo (Name BELOW Logo) */}
           <div className="flex items-center z-10">
-            <Link to="/" className="cursor-pointer">
-              <CodonLogo className="h-10" />
-               <span className="text-2xl font-black tracking-tighter">
-          Cod<span className="text-[#5bc5d4]">ON</span>
-        </span>
+            <Link to="/" className="flex flex-col items-center cursor-pointer group">
+              <CodonLogo className="h-9 w-auto" />
+              <span className="text-xs font-black tracking-widest uppercase mt-1">
+                Cod<span className="text-[#5bc5d4]">ON</span>
+              </span>
             </Link>
           </div>
 
-          {/* 2. Middle: Navigation Links (ABSOLUTE CENTERED) */}
+          {/* 2. Middle: Navigation Links (Exactly as per your drawing) */}
           <div className="hidden md:flex absolute left-1/2 -translate-x-1/2">
-            <div className="flex gap-8 text-[13px] font-bold tracking-wide uppercase">
-              <Link to="/" className="hover:text-[#5bc5d4] transition-colors">Home</Link>
-              <a href="#" className="hover:text-[#5bc5d4] transition-colors">NEET PG</a>
-              {/* <a href="#" className="hover:text-[#5bc5d4] transition-colors">Plans</a> */}
-              <a href="#" className="hover:text-[#5bc5d4] transition-colors">Careers</a>
-              <Link to="/contact" className="hover:text-[#5bc5d4] transition-colors">Contact</Link>
-              <Link to="/AboutUS" className="hover:text-[#5bc5d4] transition-colors">AboutUS</Link>
+            <div className="flex gap-8 text-[12px] font-bold tracking-wider uppercase">
+              <a href="#" className="hover:text-[#5bc5d4] transition-colors">NEET UG</a>
+              <a href="#" className="hover:text-[#5bc5d4] transition-colors">MENTORS</a>
+              <Link to="/plan" className="hover:text-[#5bc5d4] transition-colors">PLANS</Link>
+              <Link to="/feacure" className="hover:text-[#5bc5d4] transition-colors">FEATURES</Link>
+              <Link to="/contact" className="hover:text-[#5bc5d4] transition-colors">CONTACT</Link>
+              <a href="/AboutUs" className="hover:text-[#5bc5d4] transition-colors">ABOUT US</a>
+
             </div>
           </div>
 
-          {/* 3. Right Side: Dashboard Button */}
-          {/* <div className="flex items-center z-10">
-            <button className="bg-[#5bc5d4] px-7 py-2.5 rounded-lg font-bold text-sm hover:bg-white hover:text-[#1a7a85] transition-all duration-300 shadow-lg active:scale-95">
-              Dashboard
-            </button>
-          </div> */}
+          {/* 3. Right Side: Play Store & App Store Buttons */}
+          <div className="hidden lg:flex items-center gap-3 z-10">
+            {/* Play Store Button */}
+            <a
+              href="#"
+              className="flex items-center gap-2.5 px-3 py-1.5 border border-white/20 rounded-xl bg-white/5 hover:bg-[#5bc5d4]/10 hover:border-[#5bc5d4] transition-all duration-300 group"
+            >
+              <Play size={20} className="fill-[#5bc5d4] text-[#5bc5d4]" />
+              <div className="flex flex-col items-start leading-tight">
+                <span className="text-[7px] font-medium text-white/60 uppercase tracking-tighter">Get it on</span>
+                <span className="text-[13px] font-bold text-white group-hover:text-[#5bc5d4]">Google Play</span>
+              </div>
+            </a>
+
+            {/* App Store Button */}
+            <a
+              href="#"
+              className="flex items-center gap-2.5 px-3 py-1.5 border border-white/20 rounded-xl bg-white/5 hover:bg-[#5bc5d4]/10 hover:border-[#5bc5d4] transition-all duration-300 group"
+            >
+              <Apple size={22} className="text-white group-hover:text-[#5bc5d4] -mt-0.5" />
+              <div className="flex flex-col items-start leading-tight">
+                <span className="text-[7px] font-medium text-white/60 uppercase tracking-tighter">Download on the</span>
+                <span className="text-[13px] font-bold text-white group-hover:text-[#5bc5d4]">App Store</span>
+              </div>
+            </a>
+          </div>
 
         </div>
       </nav>
 
       {/* 2. HERO SECTION */}
-      {/* <section className="relative bg-gradient-to-b from-[#1a7a85] to-[#2a9ba8] pt-24 pb-32 text-center text-white px-4">
-        <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 0.8 }} className="mb-8 flex justify-center">
-          <div className="p-6 bg-white/10 backdrop-blur-md rounded-full border border-white/20 shadow-2xl">
-            <CodonLogo className="h-16" />
-          </div>
-        </motion.div>
-        
-        <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-4xl md:text-6xl font-extrabold mb-8 tracking-tight">
-          The Gold Standard for <br/>
-          <span className="text-[#5bc5d4]">NEET PG and more</span>
-        </motion.h1>
 
-        <div className="flex flex-col items-center gap-6">
-          <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="bg-[#5bc5d4] px-10 py-4 rounded-full text-xl font-bold shadow-xl hover:bg-white hover:text-[#1a7a85] transition-all">
-            Go to dashboard
-          </motion.button>
-          <a href="#" className="flex items-center gap-2 underline text-sm opacity-90 hover:text-[#5bc5d4]">
-            View Plans <Activity size={16} />
-          </a>
-        </div>
-
-        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
-            <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="relative block w-full h-[60px] fill-white">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C58.47,113.43,125.72,118.81,185.58,112.26,244.22,105.82,285.66,74.5,321.39,56.44Z"></path>
-            </svg>
-        </div>
-      </section> */}
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-[#8db6bd]">
-
         {/* 1. DYNAMIC BACKGROUND LAYER (Ultra Premium Mesh) */}
         <div className="absolute inset-0 z-0">
-          {/* Animated Glow Spotlights */}
           <motion.div
             animate={{ x: [0, 50, 0], y: [0, 30, 0] }}
             transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
@@ -172,11 +174,10 @@ const LandingPage = () => {
             transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
             className="absolute bottom-0 -right-[5%] w-[40%] h-[40%] bg-[#5bc5d4]/30 blur-[100px] rounded-full"
           />
-          {/* Subtle Grid Overlay */}
           <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5 mix-blend-overlay"></div>
         </div>
 
-        {/* 2. FLOATING DECORATIVE ELEMENTS (Adds Depth) */}
+        {/* 2. FLOATING DECORATIVE ELEMENTS */}
         <div className="absolute inset-0 pointer-events-none">
           <motion.div
             animate={{ y: [0, -20, 0], rotate: [0, 10, 0] }}
@@ -195,37 +196,52 @@ const LandingPage = () => {
         </div>
 
         {/* 3. MAIN CONTENT */}
-        <div className="relative z-10 max-w-5xl mx-auto text-center px-6">
+        <div className="relative z-10 max-w-5xl mx-auto text-center px-6 pt-10">
 
-          {/* Logo with Enhanced Glassmorphism */}
+          {/* Dr. Yogesh Desarda Presents Section */}
           <motion.div
-            initial={{ scale: 0.5, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.8, type: "spring" }}
-            className="mb-10 inline-block"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="mb-2"
           >
-            <div className="p-1 rounded-full bg-gradient-to-tr from-white/30 to-transparent mt-10">
-              <div className="p-6 md:p-8 bg-white/10 backdrop-blur-xl rounded-full border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.2)]">
-                {/* <CodonLogo className="h-12 md:h-16" /> */}
-                <img src={logo} className="h-16 md:h-16 object-contain" alt="Logo" />
+
+            <motion.div
+              initial={{ scale: 0.5, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.8, type: "spring" }}
+              className="mb-8 inline-block -mt-16 md:-mt-24"
+            >
+              <div className="p-1 rounded-full bg-gradient-to-tr from-white/30 to-transparent">
+                <div className="p-5 md:p-6 bg-white/10 backdrop-blur-xl rounded-full border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.2)]">
+                  <img src={logo} className="h-14 md:h-16 object-contain" alt="Logo" />
+                </div>
               </div>
-            </div>
+            </motion.div>
+            <p className="text-white/90 text-sm md:text-lg font-medium tracking-wide">
+              Dr. Yogesh Desarda (General Surgeon) <span className="italic opacity-80">presents</span>
+            </p>
           </motion.div>
 
-          {/* Headline with Gradient Text */}
+          {/* Logo with Enhanced Glassmorphism */}
+
+
+          {/* Headline Updated as per Sketch */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.8 }}
           >
-            <h1 className="text-5xl md:text-8xl font-black text-white mb-6 tracking-tight leading-[1.1]">
-              The Gold Standard for <br />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#5bc5d4] to-white">
-                NEET PG and more
-              </span>
+            <h1 className="text-6xl md:text-9xl font-black text-white mb-4 tracking-tighter leading-tight">
+              Cod<span className="text-[#5bc5d4]">ON</span>
             </h1>
-            <p className="text-white/70 text-lg md:text-xl max-w-2xl mx-auto mb-12 font-medium">
-              Conceptual clarity, premium question banks, and AI-driven analytics designed for the doctors of tomorrow.
+            <h2 className="text-2xl md:text-4xl font-bold text-white mb-6 tracking-tight">
+              NEET UG Learning App
+            </h2>
+
+            <p className="text-white/80 text-lg md:text-xl max-w-3xl mx-auto mb-12 font-medium leading-relaxed">
+              The Best & Simple solution for NEET-UG, <br className="hidden md:block" />
+              Mentorship & mental well being of students.
             </p>
           </motion.div>
 
@@ -234,8 +250,9 @@ const LandingPage = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="flex flex-col items-center gap-8"
-          > 
+            className="flex flex-col md:flex-row items-center justify-center gap-4"
+          >
+            {/* Yahan aap Play Store/App Store ke bade buttons bhi laga sakte hain */}
           </motion.div>
         </div>
 
@@ -256,7 +273,7 @@ const LandingPage = () => {
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">Moving beyond rote memorization to a conceptual ecosystem.</p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          {/* <div className="grid md:grid-cols-3 gap-8">
             <motion.div {...fadeInUp} className="p-8 rounded-2xl bg-slate-50 border border-gray-100 hover:shadow-xl transition-shadow">
               <div className="w-12 h-12 bg-[#1a7a85] rounded-lg flex items-center justify-center text-white mb-6"><BookOpen size={28} /></div>
               <h3 className="text-xl font-bold mb-4 text-[#1a7a85]">Evidence-Based Learning</h3>
@@ -273,6 +290,54 @@ const LandingPage = () => {
               <div className="w-12 h-12 bg-[#5bc5d4] rounded-lg flex items-center justify-center text-white mb-6"><BarChart2 size={28} /></div>
               <h3 className="text-xl font-bold mb-4 text-[#1a7a85]">Simulation</h3>
               <p className="text-gray-600 text-sm">Experience real-time exam simulations with in-depth analytics.</p>
+            </motion.div>
+          </div> */}
+
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* 1. Mentox */}
+            <motion.div {...fadeInUp} className="p-8 rounded-2xl bg-slate-50 border border-gray-100 hover:shadow-xl transition-shadow">
+              <div className="w-12 h-12 bg-[#1a7a85] rounded-lg flex items-center justify-center text-white mb-6">
+                <Users size={28} />
+              </div>
+              <h3 className="text-xl font-bold mb-4 text-[#1a7a85]">Mentox</h3>
+              <p className="text-gray-600 text-sm">Personalized Mentorship to guide you through every step of your preparation.</p>
+            </motion.div>
+
+            {/* 2. CODON */}
+            <motion.div {...fadeInUp} className="p-8 rounded-2xl bg-slate-50 border border-gray-100 hover:shadow-xl transition-shadow">
+              <div className="w-12 h-12 bg-[#34b3c1] rounded-lg flex items-center justify-center text-white mb-6">
+                <Dna size={28} />
+              </div>
+              <h3 className="text-xl font-bold mb-4 text-[#1a7a85]">CODON</h3>
+              <p className="text-gray-600 text-sm">Like Codons build DNA, here codons build the foundation of Physics, Chemistry, and Biology for NEET UG.</p>
+            </motion.div>
+
+            {/* 3. Q. Bank */}
+            <motion.div {...fadeInUp} className="p-8 rounded-2xl bg-slate-50 border border-gray-100 hover:shadow-xl transition-shadow">
+              <div className="w-12 h-12 bg-[#5bc5d4] rounded-lg flex items-center justify-center text-white mb-6">
+                <Database size={28} />
+              </div>
+              <h3 className="text-xl font-bold mb-4 text-[#1a7a85]">Q. Bank</h3>
+              <p className="text-gray-600 text-sm">A comprehensive Question Bank designed for deep conceptual practice and mastery.</p>
+            </motion.div>
+
+            {/* 4. Test Series */}
+            <motion.div {...fadeInUp} className="p-8 rounded-2xl bg-slate-50 border border-gray-100 hover:shadow-xl transition-shadow">
+              <div className="w-12 h-12 bg-[#1a7a85] rounded-lg flex items-center justify-center text-white mb-6">
+                <ClipboardCheck size={28} />
+              </div>
+              <h3 className="text-xl font-bold mb-4 text-[#1a7a85]">Test Series</h3>
+              <p className="text-gray-600 text-sm">Rigorous test series to simulate real exam environments and track your progress.</p>
+            </motion.div>
+
+            {/* 5. Recorded Video Classes */}
+            <motion.div {...fadeInUp} className="p-8 rounded-2xl bg-slate-50 border border-gray-100 hover:shadow-xl transition-shadow">
+              <div className="w-12 h-12 bg-[#34b3c1] rounded-lg flex items-center justify-center text-white mb-6">
+                <Video size={28} />
+              </div>
+              <h3 className="text-xl font-bold mb-4 text-[#1a7a85]">Recorded Video Classes</h3>
+              <p className="text-gray-600 text-sm">High-quality recorded sessions for flexible learning and quick conceptual revision.</p>
             </motion.div>
           </div>
         </div>
@@ -294,8 +359,105 @@ const LandingPage = () => {
         </div>
       </section>
 
+
+
+
+
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+
+          {/* Header with Navigation */}
+          <div className="flex flex-col md:flex-row justify-between items-center mb-16 gap-6">
+            <div className="text-center md:text-left">
+              <h2 className="text-4xl md:text-5xl font-black text-[#1a7a85] mb-4 tracking-tight">
+                Meet Our Expert Faculty
+              </h2>
+              <div className="h-1.5 w-24 bg-[#5bc5d4] rounded-full mx-auto md:mx-0"></div>
+            </div>
+
+            {/* Slider Buttons - Sirf tab dikhenge jab items itemsPerPage se zyada honge */}
+            {faculty.length > itemsPerPage && (
+              <div className="flex gap-4">
+                <button onClick={prevSlide} className="group p-4 rounded-2xl border-2 border-slate-100 hover:border-[#5bc5d4] hover:bg-[#5bc5d4]/10 transition-all duration-300">
+                  <ChevronLeft size={24} className="group-hover:text-[#1a7a85] text-slate-400" />
+                </button>
+                <button onClick={nextSlide} className="group p-4 rounded-2xl border-2 border-slate-100 hover:border-[#5bc5d4] hover:bg-[#5bc5d4]/10 transition-all duration-300">
+                  <ChevronRight size={24} className="group-hover:text-[#1a7a85] text-slate-400" />
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* Faculty Grid Animation */}
+          <div className="min-h-[450px]">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentIndex}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4 }}
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+              >
+                {visibleFaculty.map((member, index) => (
+                  <motion.div
+                    key={member.id || index}
+                    whileHover={{ y: -10 }}
+                    className="bg-white rounded-[2.5rem] p-4 shadow-[0_10px_40px_rgba(0,0,0,0.04)] border border-slate-50 group transition-all duration-500 hover:shadow-[0_20px_60px_rgba(26,122,133,0.12)]"
+                  >
+                    {/* Faculty Image */}
+                    <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden mb-6">
+                      <img
+                        // src={member.img || '/fallback-avatar.jpg'} // API se img field
+                        src={`${import.meta.env.VITE_BASE_URL}/uploads/${member.image}`} 
+                        alt={member.name}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      />
+                      <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md p-2 rounded-xl text-[#1a7a85] shadow-sm">
+                        <GraduationCap size={20} />
+                      </div>
+                    </div>
+
+                    {/* Faculty Details */}
+                    <div className="px-2 pb-2">
+                      <h3 className="text-xl font-bold text-slate-800 mb-1 group-hover:text-[#1a7a85] transition-colors">
+                        {member.name}
+                      </h3>
+                      <p className="text-[#5bc5d4] text-[13px] font-extrabold uppercase tracking-widest mb-3">
+                        {member.degree}
+                      </p>
+                      <p className="text-slate-500 text-sm leading-relaxed line-clamp-2">
+                        {member.description}
+                      </p>
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Progress Indicator */}
+          <div className="flex justify-center gap-2 mt-12">
+            {Array.from({ length: Math.ceil(faculty.length / itemsPerPage) }).map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrentIndex(i * itemsPerPage)}
+                className={`h-1.5 transition-all duration-500 rounded-full ${Math.floor(currentIndex / itemsPerPage) === i ? "w-12 bg-[#1a7a85]" : "w-4 bg-slate-200"
+                  }`}
+              />
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+
+
+
+
+
       {/* 6. TESTIMONIALS SECTION */}
-      <section className="py-24 px-6 bg-slate-50 overflow-hidden">
+      {/* <section className="py-24 px-6 bg-slate-50 overflow-hidden">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-extrabold text-gray-900 mb-4">Success Stories from <span className="text-[#1a7a85]">Top Rankers</span></h2>
@@ -350,52 +512,52 @@ const LandingPage = () => {
             </div>
           </div>
         </div>
-      </section>
-  <section className="max-w-7xl mx-auto px-6 py-16">
-  <div className="bg-gradient-to-br from-[#1a7a85] to-[#2d4d50] rounded-[3rem] p-12 text-white flex flex-col md:flex-row items-center justify-between gap-10 shadow-2xl">
-    
-    {/* Left Content */}
-    <div className="md:w-1/2 text-center md:text-left">
-      <h2 className="text-3xl md:text-5xl font-bold mb-6">Learn on the go.</h2>
-      <p className="text-teal-50/80 text-lg mb-8">
-        Join 500,000+ students mastering medical concepts every day. Available on all your devices.
-      </p>
-      <div className="flex flex-wrap justify-center md:justify-start gap-4">
-        {/* App Store Button */}
-        <button className="bg-white text-black px-8 py-3 rounded-2xl font-bold flex items-center gap-3 hover:bg-slate-100 transition shadow-lg active:scale-95">
-          <div className="text-left leading-none text-[10px] uppercase text-gray-500">
-            Download on <br />
-            <span className="text-lg text-black">App Store</span>
-          </div>
-        </button>
-        {/* Play Store Button */}
-        <button className="bg-black text-white px-8 py-3 rounded-2xl font-bold border border-white/20 flex items-center gap-3 hover:bg-white/10 transition shadow-lg active:scale-95">
-          <div className="text-left leading-none text-[10px] uppercase text-gray-400">
-            Get it on <br />
-            <span className="text-lg text-white">Google Play</span>
-          </div>
-        </button>
-      </div>
-    </div>
+      </section> */}
+      <section className="max-w-7xl mx-auto px-6 py-16">
+        <div className="bg-gradient-to-br from-[#1a7a85] to-[#2d4d50] rounded-[3rem] p-12 text-white flex flex-col md:flex-row items-center justify-between gap-10 shadow-2xl">
 
-    {/* Right Content: Logo + Brand Name inside Circle */}
-    <div className="md:w-1/3 flex justify-center">
-      <div className="w-64 h-64 bg-white/10 rounded-full border border-white/20 flex items-center justify-center backdrop-blur-md shadow-inner relative group transition-all duration-500 hover:bg-white/15">
-        
-        {/* Logo and Name Container */}
-        <div className="flex flex-col items-center gap-2">
-          <CodonLogo className="h-20 md:h-24 transition-transform duration-500 group-hover:scale-110" />
-          <span className="text-3xl md:text-4xl font-black tracking-tighter text-white drop-shadow-lg">
-            Cod<span className="text-[#5bc5d4]">ON</span>
-          </span>
-          <div className="w-12 h-1 bg-[#5bc5d4] rounded-full mt-1 opacity-50 group-hover:w-20 transition-all duration-500"></div>
+          {/* Left Content */}
+          <div className="md:w-1/2 text-center md:text-left">
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">Learn on the go.</h2>
+            <p className="text-teal-50/80 text-lg mb-8">
+              Join 500,000+ students mastering medical concepts every day. Available on all your devices.
+            </p>
+            <div className="flex flex-wrap justify-center md:justify-start gap-4">
+              {/* App Store Button */}
+              <button className="bg-white text-black px-8 py-3 rounded-2xl font-bold flex items-center gap-3 hover:bg-slate-100 transition shadow-lg active:scale-95">
+                <div className="text-left leading-none text-[10px] uppercase text-gray-500">
+                  Download on <br />
+                  <span className="text-lg text-black">App Store</span>
+                </div>
+              </button>
+              {/* Play Store Button */}
+              <button className="bg-black text-white px-8 py-3 rounded-2xl font-bold border border-white/20 flex items-center gap-3 hover:bg-white/10 transition shadow-lg active:scale-95">
+                <div className="text-left leading-none text-[10px] uppercase text-gray-400">
+                  Get it on <br />
+                  <span className="text-lg text-white">Google Play</span>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          {/* Right Content: Logo + Brand Name inside Circle */}
+          <div className="md:w-1/3 flex justify-center">
+            <div className="w-64 h-64 bg-white/10 rounded-full border border-white/20 flex items-center justify-center backdrop-blur-md shadow-inner relative group transition-all duration-500 hover:bg-white/15">
+
+              {/* Logo and Name Container */}
+              <div className="flex flex-col items-center gap-2">
+                <CodonLogo className="h-20 md:h-24 transition-transform duration-500 group-hover:scale-110" />
+                <span className="text-3xl md:text-4xl font-black tracking-tighter text-white drop-shadow-lg">
+                  {/* Cod<span className="text-[#5bc5d4]">ON</span> */}
+                </span>
+                <div className="w-12 h-1 bg-[#5bc5d4] rounded-full mt-1 opacity-50 group-hover:w-20 transition-all duration-500"></div>
+              </div>
+
+            </div>
+          </div>
+
         </div>
-
-      </div>
-    </div>
-
-  </div>
-</section>
+      </section>
 
       {/* TEST SERIES SECTION */}
       <section className="py-20 px-6 max-w-6xl mx-auto text-center">
@@ -451,50 +613,42 @@ const LandingPage = () => {
             <Youtube size={24} />
           </a>
 
-          <a
-            href="https://x.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-400 hover:text-white transition-all duration-300 transform hover:scale-110"
-          >
-            {/* Lucide me Twitter icon hi X ke liye use hota hai */}
-            <Twitter size={24} />
-          </a>
+
         </div>
 
         {/* Copyright Section */}
         <p className="text-gray-500 text-sm border-t border-gray-800 pt-8 max-w-xs mx-auto">
-          © 2026 codON Academy. Empowering Future Specialists.
+          © 2026 CODON Classes. Empowering Future Specialists.
         </p>
       </footer>
 
       {/* --- FLOATING WHATSAPP BUTTON --- */}
-<motion.a
-  href="https://wa.me/917071274274?text=Hi%20codON,%20I%20have%20a%20query%20regarding%20NEET%20PG%20preparation."
-  target="_blank"
-  rel="noopener noreferrer"
-  initial={{ scale: 0, opacity: 0 }}
-  animate={{ scale: 1, opacity: 1 }}
-  whileHover={{ scale: 1.1 }}
-  whileTap={{ scale: 0.9 }}
-  className="fixed bottom-8 right-8 z-[100] bg-[#25D366] text-white p-4 rounded-full shadow-[0_10px_30px_rgba(37,211,102,0.4)] flex items-center justify-center group"
->
-  {/* WhatsApp SVG Icon */}
-  <svg 
-    viewBox="0 0 24 24" 
-    width="32" 
-    height="32" 
-    fill="currentColor" 
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-  </svg>
+      <motion.a
+        href="https://wa.me/9987134790?text=Hi%20CODON,%20I%20have%20a%20query%20regarding%20NEET%20PG%20preparation."
+        target="_blank"
+        rel="noopener noreferrer"
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        className="fixed bottom-8 right-8 z-[100] bg-[#25D366] text-white p-4 rounded-full shadow-[0_10px_30px_rgba(37,211,102,0.4)] flex items-center justify-center group"
+      >
+        {/* WhatsApp SVG Icon */}
+        <svg
+          viewBox="0 0 24 24"
+          width="32"
+          height="32"
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </svg>
 
-  {/* Tooltip Label (Hover par dikhega) */}
-  <span className="absolute right-full mr-4 bg-white text-gray-800 px-3 py-1 rounded-lg text-sm font-bold shadow-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap border border-gray-100">
-    Chat with Experts
-  </span>
-</motion.a>
+        {/* Tooltip Label (Hover par dikhega) */}
+        <span className="absolute right-full mr-4 bg-white text-gray-800 px-3 py-1 rounded-lg text-sm font-bold shadow-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap border border-gray-100">
+          Chat with Experts
+        </span>
+      </motion.a>
     </div>
   );
 };
