@@ -1,5 +1,5 @@
-import React, { useState,useEffect } from 'react'; // Corrected Import
-import { motion ,AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect } from 'react'; // Corrected Import
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   PlayCircle, BookOpen, Play, Apple, BarChart2, Settings, Activity, ChevronLeft,
   ChevronRight, GraduationCap, Loader2, Sparkles, Facebook, Instagram, Youtube, Users, Dna, Database, ClipboardCheck, Video
@@ -7,6 +7,7 @@ import {
 import { Link } from "react-router-dom";
 import logo from "./assets/logo.png"
 import text from "./assets/text.png"
+import Header from './Header';
 
 // --- PROFESSIONAL LOGO COMPONENT ---
 const CodonLogo = ({ className = "h-8" }) => (
@@ -22,45 +23,45 @@ const CodonLogo = ({ className = "h-8" }) => (
 
 
 const LandingPage = () => {
-const [faculty, setFaculty] = useState([]);
+  const [faculty, setFaculty] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+
   const itemsPerPage = 4;
 
   // Environment variable se base URL nikalna
   const BASE_URL = import.meta.env.VITE_BASE_URL || process.env.REACT_APP_BASE_URL;
 
-useEffect(() => {
-  const fetchFaculty = async () => {
-    try {
-      setLoading(true);
-      
-      // BASE_URL yahan define karein
-      const BASE_URL = import.meta.env.VITE_BASE_URL;
-      
-      // API Call: baseURL/api/faculty/list
-      // Note: Base URL ke baad / check kar lein, double // na ho jaye
-      const response = await fetch(`${BASE_URL}/api/faculty/list`);
-      
-      if (!response.ok) throw new Error('Network response was not ok');
-      
-      const resData = await response.json();
-      
-      // Agar aapka data "data" key ke andar hai toh resData.data use karein
-      setFaculty(resData.data || resData); 
-      
-    } catch (err) {
-      console.error("Fetch Error:", err);
-      setError("Data load nahi ho paya");
-    } finally {
-      setLoading(false);
-    }
-  };
+  useEffect(() => {
+    const fetchFaculty = async () => {
+      try {
+        setLoading(true);
 
-  fetchFaculty();
-}, []);
+        // BASE_URL yahan define karein
+        const BASE_URL = import.meta.env.VITE_BASE_URL;
+
+        // API Call: baseURL/api/faculty/list
+        // Note: Base URL ke baad / check kar lein, double // na ho jaye
+        const response = await fetch(`${BASE_URL}/api/faculty/list`);
+
+        if (!response.ok) throw new Error('Network response was not ok');
+
+        const resData = await response.json();
+
+        // Agar aapka data "data" key ke andar hai toh resData.data use karein
+        setFaculty(resData.data || resData);
+
+      } catch (err) {
+        console.error("Fetch Error:", err);
+        setError("Data load nahi ho paya");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFaculty();
+  }, []);
 
   // Slider Logic (4 items at a time)
   const nextSlide = () => {
@@ -102,67 +103,13 @@ useEffect(() => {
   return (
     <div className="min-h-screen bg-white font-sans text-gray-800">
 
+      <Header />
 
-      <nav className="bg-black/90 backdrop-blur-md text-white sticky top-0 z-50 shadow-lg w-full border-b border-white/5">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between relative">
-
-          {/* 1. Left Side: Logo (Name BELOW Logo) */}
-          <div className="flex items-center z-10">
-            <Link to="/" className="flex flex-col items-center cursor-pointer group">
-              <CodonLogo className="h-9 w-auto" />
-              <span className="text-xs font-black tracking-widest uppercase mt-1">
-                Cod<span className="text-[#5bc5d4]">ON</span>
-              </span>
-            </Link>
-          </div>
-
-          {/* 2. Middle: Navigation Links (Exactly as per your drawing) */}
-          <div className="hidden md:flex absolute left-1/2 -translate-x-1/2">
-            <div className="flex gap-8 text-[12px] font-bold tracking-wider uppercase">
-              <a href="#" className="hover:text-[#5bc5d4] transition-colors">NEET UG</a>
-              <a href="#" className="hover:text-[#5bc5d4] transition-colors">MENTORS</a>
-              <Link to="#" className="hover:text-[#5bc5d4] transition-colors">PLANS</Link>
-              <Link to="#" className="hover:text-[#5bc5d4] transition-colors">FEATURES</Link>
-              <Link to="/contact" className="hover:text-[#5bc5d4] transition-colors">CONTACT</Link>
-              <a href="/AboutUs" className="hover:text-[#5bc5d4] transition-colors">ABOUT US</a>
-
-            </div>
-          </div>
-
-          {/* 3. Right Side: Play Store & App Store Buttons */}
-          <div className="hidden lg:flex items-center gap-3 z-10">
-            {/* Play Store Button */}
-            <a
-              href="#"
-              className="flex items-center gap-2.5 px-3 py-1.5 border border-white/20 rounded-xl bg-white/5 hover:bg-[#5bc5d4]/10 hover:border-[#5bc5d4] transition-all duration-300 group"
-            >
-              <Play size={20} className="fill-[#5bc5d4] text-[#5bc5d4]" />
-              <div className="flex flex-col items-start leading-tight">
-                <span className="text-[7px] font-medium text-white/60 uppercase tracking-tighter">Get it on</span>
-                <span className="text-[13px] font-bold text-white group-hover:text-[#5bc5d4]">Google Play</span>
-              </div>
-            </a>
-
-            {/* App Store Button */}
-            <a
-              href="#"
-              className="flex items-center gap-2.5 px-3 py-1.5 border border-white/20 rounded-xl bg-white/5 hover:bg-[#5bc5d4]/10 hover:border-[#5bc5d4] transition-all duration-300 group"
-            >
-              <Apple size={22} className="text-white group-hover:text-[#5bc5d4] -mt-0.5" />
-              <div className="flex flex-col items-start leading-tight">
-                <span className="text-[7px] font-medium text-white/60 uppercase tracking-tighter">Download on the</span>
-                <span className="text-[13px] font-bold text-white group-hover:text-[#5bc5d4]">App Store</span>
-              </div>
-            </a>
-          </div>
-
-        </div>
-      </nav>
 
       {/* 2. HERO SECTION */}
-
+{/* 
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-[#8db6bd]">
-        {/* 1. DYNAMIC BACKGROUND LAYER (Ultra Premium Mesh) */}
+      
         <div className="absolute inset-0 z-0">
           <motion.div
             animate={{ x: [0, 50, 0], y: [0, 30, 0] }}
@@ -177,7 +124,7 @@ useEffect(() => {
           <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5 mix-blend-overlay"></div>
         </div>
 
-        {/* 2. FLOATING DECORATIVE ELEMENTS */}
+    
         <div className="absolute inset-0 pointer-events-none">
           <motion.div
             animate={{ y: [0, -20, 0], rotate: [0, 10, 0] }}
@@ -195,10 +142,10 @@ useEffect(() => {
           </motion.div>
         </div>
 
-        {/* 3. MAIN CONTENT */}
+   
         <div className="relative z-10 max-w-5xl mx-auto text-center px-6 pt-10">
 
-          {/* Dr. Yogesh Desarda Presents Section */}
+
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -223,18 +170,13 @@ useEffect(() => {
             </p>
           </motion.div>
 
-          {/* Logo with Enhanced Glassmorphism */}
 
 
-          {/* Headline Updated as per Sketch */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.8 }}
           >
-            <h1 className="text-6xl md:text-9xl font-black text-white mb-4 mt-2 tracking-tighter leading-tight">
-              Cod<span className="text-[#5bc5d4]">ON</span>
-            </h1>
             <h2 className="text-2xl md:text-4xl font-bold text-white mb-6 tracking-tight">
               NEET UG Learning App
             </h2>
@@ -245,23 +187,201 @@ useEffect(() => {
             </p>
           </motion.div>
 
-          {/* Action Buttons */}
+     
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
             className="flex flex-col md:flex-row items-center justify-center gap-4"
           >
-            {/* Yahan aap Play Store/App Store ke bade buttons bhi laga sakte hain */}
+        
           </motion.div>
         </div>
 
-        {/* 4. PREMIUM SMOOTH WAVE TRANSITION */}
+  
         <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-10">
           <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="relative block w-full h-[80px] fill-white">
             <path d="M0,0 C300,80 900,10 1200,80 V120 H0 Z" opacity="0.4"></path>
             <path d="M0,40 C400,120 800,20 1200,100 V120 H0 Z"></path>
           </svg>
+        </div>
+      </section> */}
+
+
+<section className="relative min-h-[90vh] flex items-start justify-center overflow-hidden bg-[#8db6bd]">
+  {/* 1. DYNAMIC BACKGROUND LAYER - No Changes */}
+  <div className="absolute inset-0 z-0">
+    <motion.div
+      animate={{ x: [0, 50, 0], y: [0, 30, 0] }}
+      transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+      className="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-[#5bc5d4]/20 blur-[120px] rounded-full"
+    />
+    <motion.div
+      animate={{ x: [0, -40, 0], y: [0, -60, 0] }}
+      transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+      className="absolute bottom-0 -right-[5%] w-[40%] h-[40%] bg-[#5bc5d4]/30 blur-[100px] rounded-full"
+    />
+    <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5 mix-blend-overlay"></div>
+  </div>
+
+  {/* 2. FLOATING DECORATIVE ELEMENTS - No Changes */}
+  <div className="absolute inset-0 pointer-events-none">
+    <motion.div
+      animate={{ y: [0, -20, 0], rotate: [0, 10, 0] }}
+      transition={{ duration: 5, repeat: Infinity }}
+      className="absolute top-1/4 left-10 md:left-24 opacity-20 hidden md:block"
+    >
+      <Activity size={40} className="text-[#5bc5d4]" />
+    </motion.div>
+    <motion.div
+      animate={{ y: [0, 20, 0], rotate: [0, -10, 0] }}
+      transition={{ duration: 7, repeat: Infinity }}
+      className="absolute bottom-1/4 right-10 md:right-24 opacity-20 hidden md:block"
+    >
+      <Sparkles size={40} className="text-[#5bc5d4]" />
+    </motion.div>
+  </div>
+
+  {/* 3. MAIN CONTENT */}
+  {/* यहाँ pt-10 (मोबाइल) और md:pt-20 (डेस्कटॉप) सेट किया है जो पूरे कंटेंट को ऊपर धकेल देगा */}
+  <div className="relative z-10 max-w-5xl mx-auto text-center px-6 pt-10 md:pt-20">
+
+    {/* Top Brand Section */}
+    <motion.div
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      className="mb-2"
+    >
+      <motion.div
+        initial={{ scale: 0.5, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.8, type: "spring" }}
+        className="mb-6 inline-block" 
+      >
+        <div className="p-1 rounded-full bg-gradient-to-tr from-white/30 to-transparent">
+          <div className="p-4 md:p-6 bg-white/10 backdrop-blur-xl rounded-full border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.2)]">
+            <img src={logo} className="h-12 md:h-16 object-contain" alt="Logo" />
+          </div>
+        </div>
+      </motion.div>
+
+      <p className="text-white/90 text-[13px] md:text-lg font-medium tracking-wide">
+        Dr. Yogesh Desarda (General Surgeon) <span className="italic opacity-80">presents</span>
+      </p>
+    </motion.div>
+
+    {/* Headline Section */}
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.2, duration: 0.8 }}
+    >
+      <h2 className="text-xl md:text-4xl font-bold text-white mb-4 md:mb-6 tracking-tight">
+        NEET UG Learning App
+      </h2>
+
+      <p className="text-white/80 text-sm md:text-xl max-w-3xl mx-auto mb-8 md:mb-12 font-medium leading-relaxed">
+        The Best & Simple solution for NEET-UG, <br className="hidden md:block" />
+        Mentorship & mental well being of students.
+      </p>
+    </motion.div>
+  </div>
+
+  {/* 4. PREMIUM WAVE TRANSITION */}
+  <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-10">
+    <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="relative block w-full h-[60px] md:h-[80px] fill-white">
+      <path d="M0,0 C300,80 900,10 1200,80 V120 H0 Z" opacity="0.4"></path>
+      <path d="M0,40 C400,120 800,20 1200,100 V120 H0 Z"></path>
+    </svg>
+  </div>
+</section>
+
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+
+          {/* Header with Navigation */}
+          <div className="flex flex-col md:flex-row justify-between items-center mb-16 gap-6">
+            <div className="text-center md:text-left">
+              <h2 className="text-4xl md:text-5xl font-black text-[#1a7a85] mb-4 tracking-tight">
+                Meet Our Expert Faculty
+              </h2>
+              <div className="h-1.5 w-24 bg-[#5bc5d4] rounded-full mx-auto md:mx-0"></div>
+            </div>
+
+            {/* Slider Buttons - Sirf tab dikhenge jab items itemsPerPage se zyada honge */}
+            {faculty.length > itemsPerPage && (
+              <div className="flex gap-4">
+                <button onClick={prevSlide} className="group p-4 rounded-2xl border-2 border-slate-100 hover:border-[#5bc5d4] hover:bg-[#5bc5d4]/10 transition-all duration-300">
+                  <ChevronLeft size={24} className="group-hover:text-[#1a7a85] text-slate-400" />
+                </button>
+                <button onClick={nextSlide} className="group p-4 rounded-2xl border-2 border-slate-100 hover:border-[#5bc5d4] hover:bg-[#5bc5d4]/10 transition-all duration-300">
+                  <ChevronRight size={24} className="group-hover:text-[#1a7a85] text-slate-400" />
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* Faculty Grid Animation */}
+          <div className="min-h-[450px]">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentIndex}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4 }}
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+              >
+                {visibleFaculty.map((member, index) => (
+                  <motion.div
+                    key={member.id || index}
+                    whileHover={{ y: -10 }}
+                    className="bg-white rounded-[2.5rem] p-4 shadow-[0_10px_40px_rgba(0,0,0,0.04)] border border-slate-50 group transition-all duration-500 hover:shadow-[0_20px_60px_rgba(26,122,133,0.12)]"
+                  >
+                    {/* Faculty Image */}
+                    <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden mb-6">
+                      <img
+                        // src={member.img || '/fallback-avatar.jpg'} // API se img field
+                        src={`${import.meta.env.VITE_BASE_URL}/uploads/${member.image}`}
+                        alt={member.name}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      />
+                      <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md p-2 rounded-xl text-[#1a7a85] shadow-sm">
+                        <GraduationCap size={20} />
+                      </div>
+                    </div>
+
+                    {/* Faculty Details */}
+                    <div className="px-2 pb-2">
+                      <h3 className="text-xl font-bold text-slate-800 mb-1 group-hover:text-[#1a7a85] transition-colors">
+                        {member.name}
+                      </h3>
+                      <p className="text-[#5bc5d4] text-[13px] font-extrabold uppercase tracking-widest mb-3">
+                        {member.degree}
+                      </p>
+                      <p className="text-slate-500 text-sm leading-relaxed line-clamp-2">
+                        {member.description}
+                      </p>
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Progress Indicator */}
+          <div className="flex justify-center gap-2 mt-12">
+            {Array.from({ length: Math.ceil(faculty.length / itemsPerPage) }).map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrentIndex(i * itemsPerPage)}
+                className={`h-1.5 transition-all duration-500 rounded-full ${Math.floor(currentIndex / itemsPerPage) === i ? "w-12 bg-[#1a7a85]" : "w-4 bg-slate-200"
+                  }`}
+              />
+            ))}
+          </div>
+
         </div>
       </section>
 
@@ -269,7 +389,7 @@ useEffect(() => {
       <section className="py-24 px-6 bg-white">
         <div className="max-w-6xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6">The <span className="text-[#1a7a85]">codeON</span> Advantage</h2>
+            <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6">The <span className="text-[#1a7a85]">CODON</span> Advantage</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">Moving beyond rote memorization to a conceptual ecosystem.</p>
           </motion.div>
 
@@ -336,7 +456,7 @@ useEffect(() => {
               <div className="w-12 h-12 bg-[#34b3c1] rounded-lg flex items-center justify-center text-white mb-6">
                 <Video size={28} />
               </div>
-              <h3 className="text-xl font-bold mb-4 text-[#1a7a85]">Recorded Video Classes</h3>
+              <h3 className="text-xl font-bold mb-4 text-[#1a7a85]">Video Classes</h3>
               <p className="text-gray-600 text-sm">High-quality recorded sessions for flexible learning and quick conceptual revision.</p>
             </motion.div>
           </div>
@@ -344,7 +464,7 @@ useEffect(() => {
       </section>
 
       {/* VIDEO SECTION */}
-      <section className="py-20 px-6 bg-gray-50">
+      {/* <section className="py-20 px-6 bg-gray-50">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <motion.div {...fadeInUp}>
             <div className="text-[#34b3c1] mb-4"><PlayCircle size={48} /></div>
@@ -357,99 +477,13 @@ useEffect(() => {
             </div>
           </motion.div>
         </div>
-      </section>
+      </section> */}
 
 
 
 
 
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
 
-          {/* Header with Navigation */}
-          <div className="flex flex-col md:flex-row justify-between items-center mb-16 gap-6">
-            <div className="text-center md:text-left">
-              <h2 className="text-4xl md:text-5xl font-black text-[#1a7a85] mb-4 tracking-tight">
-                Meet Our Expert Faculty
-              </h2>
-              <div className="h-1.5 w-24 bg-[#5bc5d4] rounded-full mx-auto md:mx-0"></div>
-            </div>
-
-            {/* Slider Buttons - Sirf tab dikhenge jab items itemsPerPage se zyada honge */}
-            {faculty.length > itemsPerPage && (
-              <div className="flex gap-4">
-                <button onClick={prevSlide} className="group p-4 rounded-2xl border-2 border-slate-100 hover:border-[#5bc5d4] hover:bg-[#5bc5d4]/10 transition-all duration-300">
-                  <ChevronLeft size={24} className="group-hover:text-[#1a7a85] text-slate-400" />
-                </button>
-                <button onClick={nextSlide} className="group p-4 rounded-2xl border-2 border-slate-100 hover:border-[#5bc5d4] hover:bg-[#5bc5d4]/10 transition-all duration-300">
-                  <ChevronRight size={24} className="group-hover:text-[#1a7a85] text-slate-400" />
-                </button>
-              </div>
-            )}
-          </div>
-
-          {/* Faculty Grid Animation */}
-          <div className="min-h-[450px]">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentIndex}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.4 }}
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
-              >
-                {visibleFaculty.map((member, index) => (
-                  <motion.div
-                    key={member.id || index}
-                    whileHover={{ y: -10 }}
-                    className="bg-white rounded-[2.5rem] p-4 shadow-[0_10px_40px_rgba(0,0,0,0.04)] border border-slate-50 group transition-all duration-500 hover:shadow-[0_20px_60px_rgba(26,122,133,0.12)]"
-                  >
-                    {/* Faculty Image */}
-                    <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden mb-6">
-                      <img
-                        // src={member.img || '/fallback-avatar.jpg'} // API se img field
-                        src={`${import.meta.env.VITE_BASE_URL}/uploads/${member.image}`} 
-                        alt={member.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                      />
-                      <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md p-2 rounded-xl text-[#1a7a85] shadow-sm">
-                        <GraduationCap size={20} />
-                      </div>
-                    </div>
-
-                    {/* Faculty Details */}
-                    <div className="px-2 pb-2">
-                      <h3 className="text-xl font-bold text-slate-800 mb-1 group-hover:text-[#1a7a85] transition-colors">
-                        {member.name}
-                      </h3>
-                      <p className="text-[#5bc5d4] text-[13px] font-extrabold uppercase tracking-widest mb-3">
-                        {member.degree}
-                      </p>
-                      <p className="text-slate-500 text-sm leading-relaxed line-clamp-2">
-                        {member.description}
-                      </p>
-                    </div>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-          {/* Progress Indicator */}
-          <div className="flex justify-center gap-2 mt-12">
-            {Array.from({ length: Math.ceil(faculty.length / itemsPerPage) }).map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setCurrentIndex(i * itemsPerPage)}
-                className={`h-1.5 transition-all duration-500 rounded-full ${Math.floor(currentIndex / itemsPerPage) === i ? "w-12 bg-[#1a7a85]" : "w-4 bg-slate-200"
-                  }`}
-              />
-            ))}
-          </div>
-
-        </div>
-      </section>
 
 
 
@@ -559,18 +593,7 @@ useEffect(() => {
         </div>
       </section>
 
-      {/* TEST SERIES SECTION */}
-      <section className="py-20 px-6 max-w-6xl mx-auto text-center">
-        <motion.div {...fadeInUp}>
-          <BarChart2 size={48} className="mx-auto text-[#34b3c1] mb-4" />
-          <h2 className="text-4xl font-bold mb-6">The largest pan-India <span className="text-[#34b3c1]">Test Series</span></h2>
-          <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 max-w-md mx-auto">
-            <div className="text-sm text-gray-400">Your rank</div>
-            <div className="text-5xl font-bold text-[#1a7a85] my-2">22<span className="text-xl">nd</span></div>
-            <div className="text-blue-500 font-bold">99.8th Percentile</div>
-          </div>
-        </motion.div>
-      </section>
+
 
       {/* FOOTER */}
       {/* <footer className="bg-gray-900 py-12 text-center text-white">
