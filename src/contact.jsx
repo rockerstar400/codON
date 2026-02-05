@@ -112,7 +112,7 @@ const ContactPage = () => {
             </div>
           </div> */}
           <a
-              href="https://wa.me/9191111111111"
+              href="https://wa.me/9987134790"
   target="_blank"
   rel="noopener noreferrer"
   className="flex items-start gap-4 mb-8 group cursor-pointer"
@@ -124,7 +124,7 @@ const ContactPage = () => {
   <div>
     <p className="text-sm text-gray-500">Call (8am – 8pm, Everyday)</p>
     <p className="font-bold text-lg text-[#1a7a85] group-hover:underline">
-      +91 91111111111
+      +91 9987134790
     </p>
   </div>
 </a>
@@ -142,7 +142,7 @@ const ContactPage = () => {
             </div>
           </div> */}
           <a
-            href="https://mail.google.com/mail/?view=cm&fs=1&to=support@codonmed.com"
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=codonneetug@gmail.com"
   target="_blank"
   rel="noopener noreferrer"
             className="flex items-start gap-4 group cursor-pointer"
@@ -154,7 +154,7 @@ const ContactPage = () => {
             <div>
               <p className="text-sm text-gray-500">Email us</p>
               <p className="font-bold text-lg text-[#1a7a85] group-hover:underline">
-                support@codonacademy.com
+                codonneetug@gmail.com
               </p>
             </div>
           </a>
