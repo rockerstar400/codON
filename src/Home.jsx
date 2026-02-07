@@ -107,108 +107,10 @@ const LandingPage = () => {
 
 
       {/* 2. HERO SECTION */}
-{/* 
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-[#8db6bd]">
-      
-        <div className="absolute inset-0 z-0">
-          <motion.div
-            animate={{ x: [0, 50, 0], y: [0, 30, 0] }}
-            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-[#5bc5d4]/20 blur-[120px] rounded-full"
-          />
-          <motion.div
-            animate={{ x: [0, -40, 0], y: [0, -60, 0] }}
-            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute bottom-0 -right-[5%] w-[40%] h-[40%] bg-[#5bc5d4]/30 blur-[100px] rounded-full"
-          />
-          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5 mix-blend-overlay"></div>
-        </div>
-
-    
-        <div className="absolute inset-0 pointer-events-none">
-          <motion.div
-            animate={{ y: [0, -20, 0], rotate: [0, 10, 0] }}
-            transition={{ duration: 5, repeat: Infinity }}
-            className="absolute top-1/4 left-10 md:left-24 opacity-20 hidden md:block"
-          >
-            <Activity size={40} className="text-[#5bc5d4]" />
-          </motion.div>
-          <motion.div
-            animate={{ y: [0, 20, 0], rotate: [0, -10, 0] }}
-            transition={{ duration: 7, repeat: Infinity }}
-            className="absolute bottom-1/4 right-10 md:right-24 opacity-20 hidden md:block"
-          >
-            <Sparkles size={40} className="text-[#5bc5d4]" />
-          </motion.div>
-        </div>
-
-   
-        <div className="relative z-10 max-w-5xl mx-auto text-center px-6 pt-10">
-
-
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="mb-2"
-          >
-
-            <motion.div
-              initial={{ scale: 0.5, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.8, type: "spring" }}
-              className="mb-8 inline-block -mt-16 md:-mt-24"
-            >
-              <div className="p-1 rounded-full bg-gradient-to-tr from-white/30 to-transparent">
-                <div className="p-5 md:p-6 bg-white/10 backdrop-blur-xl rounded-full border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.2)]">
-                  <img src={logo} className="h-14 md:h-16 object-contain" alt="Logo" />
-                </div>
-              </div>
-            </motion.div>
-            <p className="text-white/90 text-sm md:text-lg font-medium tracking-wide">
-              Dr. Yogesh Desarda (General Surgeon) <span className="italic opacity-80">presents</span>
-            </p>
-          </motion.div>
 
 
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.8 }}
-          >
-            <h2 className="text-2xl md:text-4xl font-bold text-white mb-6 tracking-tight">
-              NEET UG Learning App
-            </h2>
-
-            <p className="text-white/80 text-lg md:text-xl max-w-3xl mx-auto mb-12 font-medium leading-relaxed">
-              The Best & Simple solution for NEET-UG, <br className="hidden md:block" />
-              Mentorship & mental well being of students.
-            </p>
-          </motion.div>
-
-     
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
-            className="flex flex-col md:flex-row items-center justify-center gap-4"
-          >
-        
-          </motion.div>
-        </div>
-
-  
-        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-10">
-          <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="relative block w-full h-[80px] fill-white">
-            <path d="M0,0 C300,80 900,10 1200,80 V120 H0 Z" opacity="0.4"></path>
-            <path d="M0,40 C400,120 800,20 1200,100 V120 H0 Z"></path>
-          </svg>
-        </div>
-      </section> */}
-
-
-<section className="relative min-h-[90vh] flex items-start justify-center overflow-hidden bg-[#8db6bd]">
+<section className="relative min-h-[60vh] md:min-h-[90vh] flex items-start justify-center overflow-hidden bg-[#8db6bd]">
   {/* 1. DYNAMIC BACKGROUND LAYER - No Changes */}
   <div className="absolute inset-0 z-0">
     <motion.div
@@ -243,30 +145,31 @@ const LandingPage = () => {
   </div>
 
   {/* 3. MAIN CONTENT */}
-  {/* यहाँ pt-10 (मोबाइल) और md:pt-20 (डेस्कटॉप) सेट किया है जो पूरे कंटेंट को ऊपर धकेल देगा */}
-  <div className="relative z-10 max-w-5xl mx-auto text-center px-6 pt-10 md:pt-20">
+  {/* Mobile pe pt-4 rakha hai aur desktop pe pt-20 */}
+  <div className="relative z-10 max-w-5xl mx-auto text-center px-6 pt-4 md:pt-20">
 
     {/* Top Brand Section */}
     <motion.div
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
-      className="mb-2"
+      className="mb-1 md:mb-2"
     >
       <motion.div
         initial={{ scale: 0.5, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.8, type: "spring" }}
-        className="mb-6 inline-block" 
+        className="mb-3 md:mb-6 inline-block" 
       >
         <div className="p-1 rounded-full bg-gradient-to-tr from-white/30 to-transparent">
-          <div className="p-4 md:p-6 bg-white/10 backdrop-blur-xl rounded-full border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.2)]">
-            <img src={logo} className="h-12 md:h-16 object-contain" alt="Logo" />
+          {/* Mobile pe p-3 rakha hai taaki circle thoda chhota dikhe */}
+          <div className="p-3 md:p-6 bg-white/10 backdrop-blur-xl rounded-full border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.2)]">
+            <img src={logo} className="h-10 md:h-16 object-contain" alt="Logo" />
           </div>
         </div>
       </motion.div>
 
-      <p className="text-white/90 text-[13px] md:text-lg font-medium tracking-wide">
+      <p className="text-white/90 text-[12px] md:text-lg font-medium tracking-wide">
         Dr. Yogesh Desarda (General Surgeon) <span className="italic opacity-80">presents</span>
       </p>
     </motion.div>
@@ -277,11 +180,11 @@ const LandingPage = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.2, duration: 0.8 }}
     >
-      <h2 className="text-xl md:text-4xl font-bold text-white mb-4 md:mb-6 tracking-tight">
+      <h2 className="text-xl md:text-4xl font-bold text-white mb-2 md:mb-6 tracking-tight">
         NEET UG Learning App
       </h2>
 
-      <p className="text-white/80 text-sm md:text-xl max-w-3xl mx-auto mb-8 md:mb-12 font-medium leading-relaxed">
+      <p className="text-white/80 text-sm md:text-xl max-w-3xl mx-auto mb-4 md:mb-12 font-medium leading-relaxed">
         The Best & Simple solution for NEET-UG, <br className="hidden md:block" />
         Mentorship & mental well being of students.
       </p>
@@ -290,7 +193,7 @@ const LandingPage = () => {
 
   {/* 4. PREMIUM WAVE TRANSITION */}
   <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-10">
-    <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="relative block w-full h-[60px] md:h-[80px] fill-white">
+    <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="relative block w-full h-[40px] md:h-[80px] fill-white">
       <path d="M0,0 C300,80 900,10 1200,80 V120 H0 Z" opacity="0.4"></path>
       <path d="M0,40 C400,120 800,20 1200,100 V120 H0 Z"></path>
     </svg>
