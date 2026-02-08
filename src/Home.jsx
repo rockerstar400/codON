@@ -27,7 +27,7 @@ const LandingPage = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-const [expandedId, setExpandedId] = useState(null);
+  const [expandedId, setExpandedId] = useState(null);
   const itemsPerPage = 4;
 
   // Environment variable se base URL nikalna
@@ -207,7 +207,7 @@ const [expandedId, setExpandedId] = useState(null);
           <div className="flex flex-col md:flex-row justify-between items-center mb-16 gap-6">
             <div className="text-center md:text-left">
               <h2 className="text-4xl md:text-5xl font-black text-[#1a7a85] mb-4 tracking-tight">
-                Meet Our Expert Faculty
+                Meet Our MMM Faculty
               </h2>
               <div className="h-1.5 w-24 bg-[#5bc5d4] rounded-full mx-auto md:mx-0"></div>
             </div>
@@ -268,30 +268,30 @@ const [expandedId, setExpandedId] = useState(null);
                       </p>
                     </div> */}
                     {/* Faculty Details */}
-<div className="px-2 pb-2">
-  <h3 className="text-xl font-bold text-slate-800 mb-1 group-hover:text-[#1a7a85] transition-colors">
-    {member.name}
-  </h3>
-  <p className="text-[#5bc5d4] text-[13px] font-extrabold uppercase tracking-widest mb-3">
-    {member.degree}
-  </p>
+                    <div className="px-2 pb-2">
+                      <h3 className="text-xl font-bold text-slate-800 mb-1 group-hover:text-[#1a7a85] transition-colors">
+                        {member.name}
+                      </h3>
+                      <p className="text-[#5bc5d4] text-[13px] font-extrabold uppercase tracking-widest mb-3">
+                        {member.degree}
+                      </p>
 
-  {/* Description with See More Logic */}
-  <div>
-    <p className={`text-slate-500 text-sm leading-relaxed ${expandedId === (member.id || member._id || index) ? '' : 'line-clamp-3'}`}>
-      {member.description}
-    </p>
-    
-    {member.description && member.description.length > 100 && (
-      <button
-        onClick={() => setExpandedId(expandedId === (member.id || member._id || index) ? null : (member.id || member._id || index))}
-        className="text-[#1a7a85] text-xs font-bold mt-2 hover:underline flex items-center gap-1"
-      >
-        {expandedId === (member.id || member._id || index) ? 'See Less' : 'See More...'}
-      </button>
-    )}
-  </div>
-</div>
+                      {/* Description with See More Logic */}
+                      <div>
+                        <p className={`text-slate-500 text-sm leading-relaxed ${expandedId === (member.id || member._id || index) ? '' : 'line-clamp-3'}`}>
+                          {member.description}
+                        </p>
+
+                        {member.description && member.description.length > 100 && (
+                          <button
+                            onClick={() => setExpandedId(expandedId === (member.id || member._id || index) ? null : (member.id || member._id || index))}
+                            className="text-[#1a7a85] text-xs font-bold mt-2 hover:underline flex items-center gap-1"
+                          >
+                            {expandedId === (member.id || member._id || index) ? 'See Less' : 'See More...'}
+                          </button>
+                        )}
+                      </div>
+                    </div>
                   </motion.div>
                 ))}
               </motion.div>
