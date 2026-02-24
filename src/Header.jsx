@@ -47,16 +47,20 @@ const Header = () => {
         </div>
 
         {/* 2. Desktop Navigation Links (Middle) */}
-        <div className="hidden md:flex absolute left-1/2 -translate-x-1/2">
-          <div className="flex gap-6 lg:gap-8 text-[12px] font-bold tracking-wider uppercase">
-            <a href="#" className="hover:text-[#5bc5d4] transition-colors">NEET UG</a>
-            <a href="#" className="hover:text-[#5bc5d4] transition-colors">MENTORS</a>
-            <Link to="#" className="hover:text-[#5bc5d4] transition-colors">PLANS</Link>
-            <Link to="#" className="hover:text-[#5bc5d4] transition-colors">FEATURES</Link>
-            <Link to="/contact" className="hover:text-[#5bc5d4] transition-colors">CONTACT</Link>
-            <a href="/AboutUs" className="hover:text-[#5bc5d4] transition-colors">ABOUT US</a>
-          </div>
-        </div>
+<div className="hidden md:flex absolute left-1/2 -translate-x-[calc(50%+105px)]">
+
+  <div className="flex flex-nowrap whitespace-nowrap gap-6 lg:gap-8 text-[12px] font-bold tracking-wider uppercase">
+    <a href="#" className="hover:text-[#5bc5d4] transition-colors">NEET UG</a>
+    <a href="#" className="hover:text-[#5bc5d4] transition-colors">MENTORS</a>
+    <Link to="/plans" className="hover:text-[#5bc5d4] transition-colors">PLANS</Link>
+    <Link to="#" className="hover:text-[#5bc5d4] transition-colors">FEATURES</Link>
+    <Link to="/contact" className="hover:text-[#5bc5d4] transition-colors">CONTACT</Link>
+    <a href="/AboutUs" className="hover:text-[#5bc5d4] transition-colors">ABOUT US</a>
+    <a href="/Terms" className="hover:text-[#5bc5d4] transition-colors">Term & Conditions</a>
+    <a href="/PrivacyPolicy" className="hover:text-[#5bc5d4] transition-colors">Privacy Policy</a>
+  </div>
+</div>
+
 
         {/* 3. Right Side: Store Buttons (Desktop) & Hamburger (Mobile) */}
         <div className="flex items-center gap-3 z-50">

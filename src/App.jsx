@@ -24,6 +24,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "./Home";
 import ContactPage from "./contact";
 import AboutUs from "./AboutUs";
+import Terms from "./Terms";
+import PrivacyPolicy from "./privacy";
+import Plans from "./Plan";
 
 function App() {
   return (
@@ -32,6 +35,9 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/contact" element={<ContactPage />} />
            <Route path="/AboutUs" element={<AboutUs />} />
+           <Route path="/Terms" element={<Terms />} />
+           <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
+           <Route path="/plans" element={<Plans />} />
       </Routes>
     </Router>
   );
