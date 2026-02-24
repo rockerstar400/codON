@@ -27,6 +27,8 @@ import AboutUs from "./AboutUs";
 import Terms from "./Terms";
 import PrivacyPolicy from "./privacy";
 import Plans from "./Plan";
+import FAQ from "./Faq";
+import RefundPolicy from "./RefundPolicy";
 
 function App() {
   return (
@@ -38,6 +40,8 @@ function App() {
            <Route path="/Terms" element={<Terms />} />
            <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
            <Route path="/plans" element={<Plans />} />
+           <Route path="/Faqs" element={<FAQ />} />
+           <Route path="/RefundPolicy" element={<RefundPolicy />} />
       </Routes>
     </Router>
   );

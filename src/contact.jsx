@@ -71,7 +71,7 @@ const ContactPage = () => {
   <div>
     <p className="text-sm text-gray-500">Call (8am – 8pm, Everyday)</p>
     <p className="font-bold text-lg text-[#1a7a85] group-hover:underline">
-      +91 9987134790
+      +91 9987134790  
     </p>
   </div>
 </a>
@@ -113,8 +113,8 @@ const ContactPage = () => {
       <section className="text-center pb-16">
         <p className="font-semibold text-[#1a7a85]">CodON Academy Pvt. Ltd.</p>
         <p className="text-gray-600 text-sm mt-2">
-          393, Second Cross, Dollars Colony <br />
-          JP Nagar 4th Phase, Bangalore – 560078
+         Codon by dr yogesh – A-404, Nirman palace,   <br />
+          Sher-e-punjab, Andheri east, Mumbai – 400093
         </p>
       </section>
 
@@ -123,11 +123,11 @@ const ContactPage = () => {
         <div className="flex justify-center mb-4 opacity-80">
           <CodonLogo />
         </div>
-        <p className="text-gray-500 text-sm">© 2026 codON Academy</p>
+        <p className="text-gray-500 text-sm">© 2026 codon Academy</p>
         <div className="flex justify-center gap-6 mt-4 text-xs text-gray-400">
-          <a href="#" className="hover:text-white">Privacy Policy</a>
-          <a href="#" className="hover:text-white">Terms</a>
-          <a href="#" className="hover:text-white">Support</a>
+          <a href="/PrivacyPolicy" className="hover:text-white">Privacy Policy</a>
+          <a href="/Terms" className="hover:text-white">Terms</a>
+          <a href="/RefundPolicy" className="hover:text-white">RefundPolicy</a>
         </div>
       </footer>
 
