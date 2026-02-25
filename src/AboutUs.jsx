@@ -510,9 +510,17 @@ const AboutUs = () => {
             </div>
           </div>
 
-          <div className="h-[450px] rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-white">
-            <iframe title="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3889.0645476313313!2d77.5936783758436!3d12.903597416382025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae15167f2f111b%3A0xb36a18d53085287d!2sMarrow%20(Neuroglia%20Health%20Pvt%20Ltd)!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" width="100%" height="100%" style={{ border: 0 }} allowFullScreen="" loading="lazy"></iframe>
-          </div>
+<div className="h-[450px] rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-white">
+  <iframe 
+    title="map" 
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3769.743279169435!2d72.84376337597142!3d19.11778195000492!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c9e19277717b%3A0x280e8e458e0a293b!2sAndheri%2C%20Mumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1710000000000!5m2!1sen!2sin" 
+    width="100%" 
+    height="100%" 
+    style={{ border: 0 }} 
+    allowFullScreen="" 
+    loading="lazy"
+  ></iframe>
+</div>
         </div>
       </section>
 

@@ -493,12 +493,17 @@ const LandingPage = () => {
                 </div>
               </button>
               {/* Play Store Button */}
-              <button className="bg-black text-white px-8 py-3 rounded-2xl font-bold border border-white/20 flex items-center gap-3 hover:bg-white/10 transition shadow-lg active:scale-95">
+              <a
+                href="https://play.google.com/store/apps/details?id=com.codon.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-black text-white px-8 py-3 rounded-2xl font-bold border border-white/20 flex items-center gap-3 hover:bg-white/10 transition shadow-lg active:scale-95 w-fit inline-flex"
+              >
                 <div className="text-left leading-none text-[10px] uppercase text-gray-400">
                   Get it on <br />
                   <span className="text-lg text-white">Google Play</span>
                 </div>
-              </button>
+              </a>
             </div>
           </div>
 
@@ -566,6 +571,27 @@ const LandingPage = () => {
 
 
         </div>
+        <div className="flex justify-center gap-8 mb-8 text-sm font-medium">
+          <a
+            href="/Terms"
+            className="text-gray-400 hover:text-[#5bc5d4] transition-colors duration-300"
+          >
+            Terms & Conditions
+          </a>
+          <a
+            href="/PrivacyPolicy"
+            className="text-gray-400 hover:text-[#5bc5d4] transition-colors duration-300"
+          >
+            Privacy Policy
+          </a>
+          <a
+            href="/Faqs"
+            className="text-gray-400 hover:text-[#5bc5d4] transition-colors duration-300"
+          >
+            Faq's
+          </a>
+        </div>
+        
 
         {/* Copyright Section */}
         <p className="text-gray-500 text-sm border-t border-gray-800 pt-8 max-w-xs mx-auto">
@@ -617,7 +643,7 @@ const LandingPage = () => {
         <svg
           viewBox="0 0 24 24"
           // Mobile par w-10 h-10 (40px), Desktop par w-8 h-8 (32px)
-          className="w-10 h-10 md:w-8 md:h-8" 
+          className="w-10 h-10 md:w-8 md:h-8"
           fill="currentColor"
           xmlns="http://www.w3.org/2000/svg"
         >

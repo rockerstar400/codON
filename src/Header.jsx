@@ -189,12 +189,12 @@ const Header = () => {
             <a href="#" className="hover:text-[#5bc5d4] transition-colors">NEET UG</a>
             <a href="#mentors" className="hover:text-[#5bc5d4] transition-colors">MENTORS</a>
             <Link to="/plans" className="hover:text-[#5bc5d4] transition-colors">PLANS</Link>
-            <Link to="#FEATURES" className="hover:text-[#5bc5d4] transition-colors">FEATURES</Link>
+            {/* <Link to="#FEATURES" className="hover:text-[#5bc5d4] transition-colors">FEATURES</Link> */}
             <Link to="/contact" className="hover:text-[#5bc5d4] transition-colors">CONTACT</Link>
             <a href="/AboutUs" className="hover:text-[#5bc5d4] transition-colors">ABOUT US</a>
-            <a href="/Terms" className="hover:text-[#5bc5d4] transition-colors">Term & Conditions</a>
-            <a href="/PrivacyPolicy" className="hover:text-[#5bc5d4] transition-colors">Privacy Policy</a>
-             <a href="/Faqs" className="hover:text-[#5bc5d4] transition-colors">Faq's</a>
+            {/* <a href="/Terms" className="hover:text-[#5bc5d4] transition-colors">Term & Conditions</a>
+            <a href="/PrivacyPolicy" className="hover:text-[#5bc5d4] transition-colors">Privacy Policy</a> */}
+             {/* <a href="/Faqs" className="hover:text-[#5bc5d4] transition-colors">Faq's</a> */}
           </div>
         </div>
 
