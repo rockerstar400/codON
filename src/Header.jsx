@@ -187,7 +187,7 @@ const Header = () => {
         <div className="hidden md:flex absolute left-1/2 -translate-x-[calc(50%+105px)]">
           <div className="flex flex-nowrap whitespace-nowrap gap-6 lg:gap-8 text-[12px] font-bold tracking-wider uppercase">
             <a href="#" className="hover:text-[#5bc5d4] transition-colors">NEET UG</a>
-            <a href="#mentors" className="hover:text-[#5bc5d4] transition-colors">MENTORS</a>
+            {/* <a href="#mentors" className="hover:text-[#5bc5d4] transition-colors">MENTORS</a> */}
             <Link to="/plans" className="hover:text-[#5bc5d4] transition-colors">PLANS</Link>
             {/* <Link to="#FEATURES" className="hover:text-[#5bc5d4] transition-colors">FEATURES</Link> */}
             <Link to="/contact" className="hover:text-[#5bc5d4] transition-colors">CONTACT</Link>
