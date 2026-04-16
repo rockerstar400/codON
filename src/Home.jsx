@@ -594,9 +594,27 @@ const LandingPage = () => {
         
 
         {/* Copyright Section */}
-        <p className="text-gray-500 text-sm border-t border-gray-800 pt-8 max-w-xs mx-auto">
+        {/* <p className="text-gray-500 text-sm border-t border-gray-800 pt-8 max-w-xs mx-auto">
           © 2026 CODON Classes Accademy. Empowering Future Specialists.
-        </p>
+        </p> */}
+        <div className="border-t border-gray-800 pt-8">
+    <p className="text-gray-500 text-sm max-w-xs mx-auto mb-2">
+      © 2026 CODON Classes Accademy. Empowering Future Specialists.
+    </p>
+    
+    {/* Premium Developed By Credit */}
+    <p className="text-gray-600 text-[10px] uppercase tracking-[0.2em] font-medium">
+      Developed by{" "}
+      <a 
+        href="https://dbvertex.com" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        className="hover:text-[#5bc5d4] transition-all duration-300 border-b border-transparent hover:border-[#5bc5d4] pb-0.5"
+      >
+        dbvertex.com
+      </a>
+    </p>
+  </div>
       </footer>
 
       {/* --- FLOATING WHATSAPP BUTTON --- */}
